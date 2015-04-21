@@ -35,6 +35,17 @@ module.exports = function (config) {
     mapping: {
       id:                   'id',
       name:                 'name',
+      givenName:            function(source) {
+                              return source.name.split(' ')[0];
+                            },
+      familyName:           function(source) {
+                              var name = source.name.split(' ');
+                              if(name.length === 1) {
+                                return undefined;
+                              } else {
+                                return name[name.length - 1];
+                              }
+                            },
       preferredUsername:    'screen_name',
       profile:              'url',
       picture:              'profile_image_url',
